@@ -8,9 +8,9 @@ export const options = {
   /*vus: 250,
   duration: 5m,*/
   stages: [
-    { duration: '1m', target: 300,
-      duration: '28m', target: 300 },
-    { duration: '1m', target: 0 }
+    { duration: '1m', target: 300 },
+    { duration: '28m', target: 300 },
+    { duration: '1m', target: 0 },
   ],
   thresholds: {
     errors: ['rate<0.2'], // <10% errors
