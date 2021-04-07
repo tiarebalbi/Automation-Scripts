@@ -1,0 +1,39 @@
+
+name: Performance Testing
+on: 
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: 'Domain (without https)'     
+        required: true
+        default: 'beta.newdimensionsactive.ie'
+      vus:
+        required: true
+        default: 10
+        description: 'Number of virtual users'  
+
+# on:
+#   schedule:
+#     - cron: '*/15 * * * *' ## IN CASE OF A SCHEDULED TEST
+
+jobs:
+  k6_local_perf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Run local k6 test
+        uses: k6io/action@v0.1
+        with:
+          filename: k6-nda-addtocarttest.js
+          flags: -e TARGET_VUS=${{ github.event.inputs.vus }} -e TARGET_DOMAIN=${{ github.event.inputs.domain }}
+  google_insights:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Running Page Speed Insights
+        uses: jakepartusch/psi-action@v1.1
+        id: psi
+        with:
+          url: "https://${{ github.event.inputs.domain }}/"
+          threshold: 20
+          strategy: mobile

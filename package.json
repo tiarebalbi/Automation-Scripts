@@ -1,0 +1,27 @@
+{
+  "name": "automation-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "k6-nda-addtocarttest.js",
+  "scripts": {
+    "test": "k6 run k6-nda-addtocarttest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flynnd6/Automation-Scripts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flynnd6/Automation-Scripts/issues"
+  },
+  "homepage": "https://github.com/flynnd6/Automation-Scripts#readme",
+  "dependencies": {
+    "k6": "0.0.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "prettier-config-standard": "^4.0.0"
+  }
+}
