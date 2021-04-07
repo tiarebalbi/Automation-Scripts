@@ -3,13 +3,15 @@ import http from "k6/http";
 import { Rate } from "k6/metrics";
 
 const targetUser = __ENV.TARGET_VUS ? __ENV.TARGET_VUS : 10;
+const minTime = __ENV.MIN_TIME ? __ENV.MIN_TIME : '1s';
+const maxTime = __ENV.MAX_TIME ? __ENV.MAX_TIME : '10s';
 const domain = __ENV.TARGET_DOMAIN
   ? `https://${__ENV.TARGET_DOMAIN}`
   : "https://beta.newdimensionsactive.ie/";
 let printed = 0;
 
 if (printed === 0) {
-  console.log(`### Starting test with ${targetUser} VUS.`);
+  console.log(`### Starting test with ${targetUser} VUS with domain ${domain} (${minTime} / ${maxTime})`);
   printed = 1;
 }
 
@@ -18,9 +20,9 @@ export let options = {
   /*vus: 250,
   duration: 5m,*/
   stages: [
-    { duration: "1m", target: targetUser },
-    { duration: "28m", target: targetUser },
-    { duration: "1m", target: 0 },
+    { duration: minTime, target: targetUser },
+    { duration: maxTime, target: targetUser },
+    { duration: minTime, target: 0 },
   ],
   thresholds: {
     errors: ["rate<0.2"], // <10% errors

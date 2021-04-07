@@ -11,6 +11,14 @@ on:
         required: true
         default: 10
         description: 'Number of virtual users'  
+      minTime:
+        required: true
+        default: '1m'
+        description: 'Min Time'  
+      maxTime:
+        required: true
+        default: '30m'
+        description: 'Max Time'  
 
 # on:
 #   schedule:
@@ -26,7 +34,7 @@ jobs:
         uses: k6io/action@v0.1
         with:
           filename: k6-nda-addtocarttest.js
-          flags: -e TARGET_VUS=${{ github.event.inputs.vus }} -e TARGET_DOMAIN=${{ github.event.inputs.domain }}
+          flags: -e TARGET_VUS=${{ github.event.inputs.vus }} -e TARGET_DOMAIN=${{ github.event.inputs.domain }} -e MIN_TIME=${{ github.event.inputs.minTime }} -e MAX_TIME=${{ github.event.inputs.maxTime }}
   google_insights:
     runs-on: ubuntu-latest
     steps:
