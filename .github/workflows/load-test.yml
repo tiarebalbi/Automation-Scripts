@@ -27,12 +27,12 @@ jobs:
         with:
           filename: k6-nda-addtocarttest.js
           flags: -e TARGET_VUS=${{ github.event.inputs.vus }} -e TARGET_DOMAIN=${{ github.event.inputs.domain }}
-    google_insights:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Running Page Speed Insights
-          uses: jakepartusch/psi-action@v1.1
-          id: psi
+  google_insights:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Running Page Speed Insights
+        uses: jakepartusch/psi-action@v1.1
+        id: psi
         with:
           url: "https://${{ github.event.inputs.domain }}/"
           threshold: 20
