@@ -9,7 +9,7 @@ on:
         default: 'beta.newdimensionsactive.ie'
       vus:
         required: true
-        default: 10
+        default: 300
         description: 'Number of virtual users'  
       minTime:
         required: true
@@ -25,7 +25,7 @@ on:
 #     - cron: '*/15 * * * *' ## IN CASE OF A SCHEDULED TEST
 
 jobs:
-  k6_local_perf:
+  k6_local_perf_soak:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,15 +33,22 @@ jobs:
       - name: Run local k6 test
         uses: k6io/action@v0.1
         with:
-          filename: k6-nda-addtocarttest.js
+          filename: k6-nda-SoakTest.js
           flags: -e TARGET_VUS=${{ github.event.inputs.vus }} -e TARGET_DOMAIN=${{ github.event.inputs.domain }} -e MIN_TIME=${{ github.event.inputs.minTime }} -e MAX_TIME=${{ github.event.inputs.maxTime }}
   google_insights:
     runs-on: ubuntu-latest
     steps:
-      - name: Running Page Speed Insights
+      - name: Running Page Speed Insights Mobile
         uses: jakepartusch/psi-action@v1.1
         id: psi
         with:
           url: "https://${{ github.event.inputs.domain }}/"
-          threshold: 20
+          threshold: 30
           strategy: mobile
+      - name: Running Page Speed Insights Desktop
+        uses: jakepartusch/psi-action@v1.1
+        id: psi
+        with:
+          url: "https://${{ github.event.inputs.domain }}/"
+          threshold: 70
+          strategy: desktop

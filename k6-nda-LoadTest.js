@@ -2,9 +2,9 @@ import { check, sleep, group } from "k6";
 import http from "k6/http";
 import { Rate } from "k6/metrics";
 
-const targetUser = __ENV.TARGET_VUS ? __ENV.TARGET_VUS : 10;
-const minTime = __ENV.MIN_TIME ? __ENV.MIN_TIME : '1s';
-const maxTime = __ENV.MAX_TIME ? __ENV.MAX_TIME : '10s';
+const targetUser = __ENV.TARGET_VUS ? __ENV.TARGET_VUS : 500;
+const minTime = __ENV.MIN_TIME ? __ENV.MIN_TIME : '10s';
+const maxTime = __ENV.MAX_TIME ? __ENV.MAX_TIME : '1m';
 const domain = __ENV.TARGET_DOMAIN
   ? `https://${__ENV.TARGET_DOMAIN}`
   : "https://beta.newdimensionsactive.ie/";

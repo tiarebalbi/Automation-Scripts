@@ -2,9 +2,9 @@
   "name": "automation-scripts",
   "version": "1.0.0",
   "description": "",
-  "main": "k6-nda-addtocarttest.js",
+  "main": "k6-nda-SoakTest.js",
   "scripts": {
-    "test": "k6 run k6-nda-addtocarttest.js"
+    "test": "k6 run k6-nda-SoakTest.js"
   },
   "repository": {
     "type": "git",
