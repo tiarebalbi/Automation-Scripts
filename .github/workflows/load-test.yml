@@ -40,14 +40,14 @@ jobs:
     steps:
       - name: Running Page Speed Insights Mobile
         uses: jakepartusch/psi-action@v1.1
-        id: psi
+        id: psim
         with:
           url: "https://${{ github.event.inputs.domain }}/"
           threshold: 30
           strategy: mobile
       - name: Running Page Speed Insights Desktop
         uses: jakepartusch/psi-action@v1.1
-        id: psi
+        id: psid
         with:
           url: "https://${{ github.event.inputs.domain }}/"
           threshold: 70
